@@ -1,0 +1,38 @@
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9001/eureka/
+    status-page-url: ${spring.cloud.client.ipAddress}:${server.port}/swagger-ui.html
+
+server:
+  port: 9003
+  tomcat: 
+    uri-encoding: UTF-8
+
+spring:
+  application:
+      name: account
+
+  datasource:
+    url: jdbc:mysql://39.106.33.113:3306/jpt?useUnicode=true&characterEncoding=ISO-8859-1&useSSL=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+
+  jmx:
+    default-domain: account
+
+logging:
+  file: account.log
+  level:
+    org:
+      account:
+        com: debug
+
+page:
+  size: 15
