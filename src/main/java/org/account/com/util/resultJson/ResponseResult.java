@@ -3,10 +3,10 @@ package org.account.com.util.resultJson;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class ResponseResult<Object> {
+public class ResponseResult<T> {
     private boolean success;
     private String message;
-    private Object data;
+    private T data;
     private int code;
 
     public boolean isSuccess() {
@@ -25,11 +25,11 @@ public class ResponseResult<Object> {
         this.message = message;
     }
 
-    public Object getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(T data) {
         this.data = data;
     }
 
@@ -45,7 +45,7 @@ public class ResponseResult<Object> {
         super();
     }
 
-    public ResponseResult(boolean success, String message, Object data, int code) {
+    public ResponseResult(boolean success, String message, T data, int code) {
         this.success = success;
         this.message = message;
         this.data = data;
