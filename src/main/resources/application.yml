@@ -6,7 +6,7 @@ eureka:
     instance-id: ${spring.cloud.client.ipAddress}:${server.port}
   client:
     serviceUrl:
-      defaultZone: http://localhost:9001/eureka/
+      defaultZone: http://192.168.1.102:9001/eureka/
     status-page-url: ${spring.cloud.client.ipAddress}:${server.port}/swagger-ui.html
 
 server:
