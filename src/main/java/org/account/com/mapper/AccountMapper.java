@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.*;
 
 
 /**
- * @name 人员资料
+ * //@name 人员资料
  */
 public interface AccountMapper {
 
@@ -16,7 +16,7 @@ public interface AccountMapper {
     /**
      * 新增账户
      *
-     * @param model
+     * @param model AccountModel
      * @return int
      */
     @Insert({
@@ -29,9 +29,9 @@ public interface AccountMapper {
     /**
      * 修改密码
      *
-     * @param account
-     * @param password
-     * @return
+     * @param account  String
+     * @param password String
+     * @return int
      */
     @Update({
             "update" + tableName + " set password = #{password} where account = #{account}"
@@ -41,8 +41,8 @@ public interface AccountMapper {
     /**
      * 根据id获取实体
      *
-     * @param id
-     * @return
+     * @param id String
+     * @return AccountModel
      */
     @Select({
             "select * from " + tableName + " where uuid = #{id}"
@@ -52,8 +52,8 @@ public interface AccountMapper {
     /**
      * 根据账户获取实体
      *
-     * @param account
-     * @return
+     * @param account String
+     * @return AccountModel
      */
     @Select({
             "select * from " + tableName + " where account=#{account}"
@@ -63,16 +63,18 @@ public interface AccountMapper {
     /**
      * 获取所有的指定类型的账户
      *
-     * @return
+     * @param type    String
+     * @param account String
+     * @return Page<AccountModel>
      */
     @SelectProvider(type = AccountSql.class, method = "select_page_type")
-    Page<AccountModel> findAllPage(String type);
+    Page<AccountModel> findAllPage(String type, String account);
 
     /**
      * 根据id删除实体
      *
-     * @param id
-     * @return
+     * @param id String
+     * @return int
      */
     @Delete({
             "delete from account_table where uuid = #{id}"
