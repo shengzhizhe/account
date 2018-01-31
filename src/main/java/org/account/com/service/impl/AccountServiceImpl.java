@@ -149,7 +149,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public ResponseResult findAllPage(int pageNow, int pageSize, String type) {
+    public ResponseResult findAllPage(int pageNow, int pageSize, String type,String account) {
         logger.info(Sl4jToString.info(1,
                 serviceName,
                 Thread.currentThread().getStackTrace()[1].getMethodName(),
@@ -157,7 +157,7 @@ public class AccountServiceImpl implements AccountService {
                 200,
                 null));
         PageHelper.startPage(pageNow, pageSize);
-        Page<AccountModel> page = mapper.findAllPage(type);
+        Page<AccountModel> page = mapper.findAllPage(type,account);
         result.setSuccess(true);
         if (page.size() > 0)
             result.setCode(200);

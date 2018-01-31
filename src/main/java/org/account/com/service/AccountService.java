@@ -45,7 +45,7 @@ public interface AccountService {
      *
      * @return
      */
-    ResponseResult findAllPage(int pageNow, int pageSize, String type);
+    ResponseResult findAllPage(int pageNow, int pageSize, String type,String account);
 
     /**
      * 根据id删除实体

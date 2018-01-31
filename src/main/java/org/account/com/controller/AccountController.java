@@ -50,8 +50,9 @@ public class AccountController {
             method = RequestMethod.GET)
     public ResponseResult init(@RequestParam(value = "pageNow") int pageNow,
                                @RequestParam(value = "pageSize") int pageSize,
-                               @RequestParam(value = "type", required = false) String type) {
-        return accountService.findAllPage(pageNow, pageSize, type);
+                               @RequestParam(value = "type", required = false) String type,
+                               @RequestParam(value = "account", required = false) String account) {
+        return accountService.findAllPage(pageNow, pageSize, type, account);
     }
 
 
