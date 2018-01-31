@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: org.springframework.cloud:spring-cloud-starter-eureka:1.4.0.BUILD-SNAPSHOT">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/cloud/spring-cloud-starter-eureka/1.4.0.BUILD-SNAPSHOT/spring-cloud-starter-eureka-1.4.0.BUILD-20171120.201123-1386.jar!/" />
+      <root url="jar://$USER_HOME$/.m2/repository/org/springframework/cloud/spring-cloud-starter-eureka/1.4.0.BUILD-SNAPSHOT/spring-cloud-starter-eureka-1.4.0.BUILD-20171120.201123-1386.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/cloud/spring-cloud-starter-eureka/1.4.0.BUILD-SNAPSHOT/spring-cloud-starter-eureka-1.4.0.BUILD-20171120.201123-1386-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/.m2/repository/org/springframework/cloud/spring-cloud-starter-eureka/1.4.0.BUILD-SNAPSHOT/spring-cloud-starter-eureka-1.4.0.BUILD-20171120.201123-1386-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/cloud/spring-cloud-starter-eureka/1.4.0.BUILD-SNAPSHOT/spring-cloud-starter-eureka-1.4.0.BUILD-20171120.201123-1386-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.m2/repository/org/springframework/cloud/spring-cloud-starter-eureka/1.4.0.BUILD-SNAPSHOT/spring-cloud-starter-eureka-1.4.0.BUILD-20171120.201123-1386-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
