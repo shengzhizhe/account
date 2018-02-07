@@ -47,8 +47,8 @@ public class Base64Util {
      * @author 宋立君
      * @date 2014年07月03日
      */
-    public static String encode(String data) {
-        return new String(encode(data.getBytes()));
+    public static String encode(String data) throws Exception {
+        return new String(encode(data.getBytes("UTF-8")));
     }
 
     /**
@@ -59,8 +59,9 @@ public class Base64Util {
      * @author 宋立君
      * @date 2014年07月03日
      */
-    public static String decode(String data) {
-        return new String(decode(data.toCharArray()));
+    public static String decode(String data) throws Exception {
+        String s = new String(data.getBytes("UTF-8"), "UTF-8");
+        return new String(decode(s.toCharArray()),"UTF-8");
     }
 
     /**
@@ -159,43 +160,6 @@ public class Base64Util {
         return out;
     }
 
-    /**
-     * 功能：编码文件
-     *
-     * @param file 源文件
-     * @author 宋立君
-     * @date 2014年07月03日
-     */
-    public static void encode(File file) throws IOException {
-        if (!file.exists()) {
-            System.exit(0);
-        } else {
-            byte[] decoded = readBytes(file);
-            char[] encoded = encode(decoded);
-            writeChars(file, encoded);
-        }
-        file = null;
-    }
-
-    /**
-     * 功能：解码文件。
-     *
-     * @param file 源文件
-     * @throws IOException
-     * @author 宋立君
-     * @date 2014年07月03日
-     */
-    public static void decode(File file) throws IOException {
-        if (!file.exists()) {
-            System.exit(0);
-        } else {
-            char[] encoded = readChars(file);
-            byte[] decoded = decode(encoded);
-            writeBytes(file, decoded);
-        }
-        file = null;
-    }
-
     private static byte[] readBytes(File file) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         byte[] b = null;
@@ -229,36 +193,6 @@ public class Base64Util {
         return b;
     }
 
-    private static char[] readChars(File file) throws IOException {
-        CharArrayWriter caw = new CharArrayWriter();
-        Reader fr = null;
-        Reader in = null;
-        try {
-            fr = new FileReader(file);
-            in = new BufferedReader(fr);
-            int count = 0;
-            char[] buf = new char[16384];
-            while ((count = in.read(buf)) != -1) {
-                if (count > 0) {
-                    caw.write(buf, 0, count);
-                }
-            }
-
-        } finally {
-            try {
-                if (caw != null)
-                    caw.close();
-                if (in != null)
-                    in.close();
-                if (fr != null)
-                    fr.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        return caw.toCharArray();
-    }
 
     private static void writeBytes(File file, byte[] data) throws IOException {
         OutputStream fos = null;
@@ -266,26 +200,6 @@ public class Base64Util {
         try {
             fos = new FileOutputStream(file);
             os = new BufferedOutputStream(fos);
-            os.write(data);
-
-        } finally {
-            try {
-                if (os != null)
-                    os.close();
-                if (fos != null)
-                    fos.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private static void writeChars(File file, char[] data) throws IOException {
-        Writer fos = null;
-        Writer os = null;
-        try {
-            fos = new FileWriter(file);
-            os = new BufferedWriter(fos);
             os.write(data);
 
         } finally {

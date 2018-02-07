@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.StringJoiner;
 
 public class ImageCode {
     private static char mapTable[] = {
@@ -21,7 +22,7 @@ public class ImageCode {
         // 获取图形上下文
         Graphics g = image.getGraphics();
         //生成随机类
-        Random random = new Random();
+        Random random = new Random(mapTable.length);
         // 设定背景色
         g.setColor(getRandColor(200, 250));
         g.fillRect(0, 0, width, height);
@@ -37,14 +38,14 @@ public class ImageCode {
             g.drawLine(x, y, x + xl, y + yl);
         }
         //取随机产生的码
-        String strEnsure = "";
+        StringJoiner strEnsure = new StringJoiner("");
         //4代表4位验证码,如果要生成更多位的认证码,则加大数值
         for (int i = 0; i < 4; ++i) {
-            strEnsure += mapTable[(int) (mapTable.length * Math.random())];
+            strEnsure.add(String.valueOf(mapTable[random.nextInt(mapTable.length)]));
             // 将认证码显示到图象中
             g.setColor(new Color(20 + random.nextInt(110), 20 + random.nextInt(110), 20 + random.nextInt(110)));
             //直接生成
-            String str = strEnsure.substring(i, i + 1);
+            String str = strEnsure.toString().substring(i, i + 1);
             g.drawString(str, 23 * i + 12, 23);
         }
         // 释放图形上下文
