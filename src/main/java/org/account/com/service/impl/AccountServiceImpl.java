@@ -26,7 +26,7 @@ public class AccountServiceImpl implements AccountService {
     @Resource
     private AccountMapper mapper;
     @Resource
-    private ResponseResult result;
+    private ResponseResult<AccountModel> result;
 
     @Override
     public ResponseResult add(AccountModel model) {
@@ -40,6 +40,8 @@ public class AccountServiceImpl implements AccountService {
         if (model1 != null) {
             result.setSuccess(false);
             result.setCode(501);
+            result.setMessage(null);
+            result.setData(null);
         } else {
             model.setUuid(GetUuid.getUUID());
             int i = mapper.add(model);
@@ -47,11 +49,14 @@ public class AccountServiceImpl implements AccountService {
                 case 1:
                     result.setSuccess(true);
                     result.setCode(200);
-                    result.setMessage(model.getUuid());
+                    result.setMessage(null);
+                    result.setData(model);
                     break;
                 default:
                     result.setSuccess(false);
                     result.setCode(500);
+                    result.setMessage(null);
+                    result.setData(null);
                     break;
             }
         }
@@ -77,14 +82,20 @@ public class AccountServiceImpl implements AccountService {
             case 0:
                 result.setSuccess(true);
                 result.setCode(201);
+                result.setMessage(null);
+                result.setData(null);
                 break;
             case 1:
                 result.setSuccess(true);
                 result.setCode(200);
+                result.setMessage(null);
+                result.setData(null);
                 break;
             default:
                 result.setSuccess(false);
                 result.setCode(500);
+                result.setMessage(null);
+                result.setData(null);
                 break;
         }
         logger.info(Sl4jToString.info(2,
@@ -107,11 +118,12 @@ public class AccountServiceImpl implements AccountService {
         AccountModel model = mapper.getById(id);
         if (model != null) {
             result.setSuccess(true);
-            result.setData(model);
             result.setCode(200);
+            result.setData(model);
         } else {
             result.setSuccess(false);
             result.setCode(404);
+            result.setData(null);
         }
         logger.info(Sl4jToString.info(2,
                 serviceName,
@@ -133,11 +145,12 @@ public class AccountServiceImpl implements AccountService {
         AccountModel model = mapper.getByAccount(account);
         if (model != null) {
             result.setSuccess(true);
-            result.setData(model);
             result.setCode(200);
+            result.setData(model);
         } else {
             result.setSuccess(false);
             result.setCode(404);
+            result.setData(null);
         }
         logger.info(Sl4jToString.info(2,
                 serviceName,
@@ -149,7 +162,8 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public ResponseResult findAllPage(int pageNow, int pageSize, String type,String account) {
+    public ResponseResult findAllPage(int pageNow, int pageSize, String type, String account) {
+        ResponseResult<Page<AccountModel>> result = new ResponseResult<>();
         logger.info(Sl4jToString.info(1,
                 serviceName,
                 Thread.currentThread().getStackTrace()[1].getMethodName(),
@@ -157,7 +171,7 @@ public class AccountServiceImpl implements AccountService {
                 200,
                 null));
         PageHelper.startPage(pageNow, pageSize);
-        Page<AccountModel> page = mapper.findAllPage(type,account);
+        Page<AccountModel> page = mapper.findAllPage(type, account);
         result.setSuccess(true);
         if (page.size() > 0)
             result.setCode(200);
@@ -186,14 +200,17 @@ public class AccountServiceImpl implements AccountService {
             case 0:
                 result.setSuccess(true);
                 result.setCode(201);
+                result.setData(null);
                 break;
             case 1:
                 result.setSuccess(true);
                 result.setCode(200);
+                result.setData(null);
                 break;
             default:
                 result.setSuccess(false);
                 result.setCode(500);
+                result.setData(null);
                 break;
         }
         logger.info(Sl4jToString.info(2,
