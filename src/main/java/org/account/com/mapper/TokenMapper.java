@@ -20,7 +20,7 @@ public interface TokenMapper {
     int updateByToken(@Param("token") String token, @Param("use") String use);
 
     @Select({
-            "select uuid,account,token,end_time endTimes,is_use isUse from token_table where account=#{account}"
+            "select uuid,account,token,end_time endTimes,is_use isUse from token_table where account=#{account} ORDER BY end_time desc LIMIT 1"
     })
     TokenModel getByAccount(@Param("account") String account);
 }
