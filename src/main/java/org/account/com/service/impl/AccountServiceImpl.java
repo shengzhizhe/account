@@ -63,7 +63,7 @@ public class AccountServiceImpl implements AccountService {
         logger.info(Sl4jToString.info(2,
                 serviceName,
                 Thread.currentThread().getStackTrace()[1].getMethodName(),
-                model.toString(),
+                result.toString(),
                 result.getCode(),
                 null));
         return result;
@@ -101,7 +101,7 @@ public class AccountServiceImpl implements AccountService {
         logger.info(Sl4jToString.info(2,
                 serviceName,
                 Thread.currentThread().getStackTrace()[1].getMethodName(),
-                account + "," + password,
+                result.toString(),
                 result.getCode(),
                 null));
         return result;
@@ -128,7 +128,7 @@ public class AccountServiceImpl implements AccountService {
         logger.info(Sl4jToString.info(2,
                 serviceName,
                 Thread.currentThread().getStackTrace()[1].getMethodName(),
-                id,
+                result.toString(),
                 200,
                 null));
         return result;
@@ -155,7 +155,7 @@ public class AccountServiceImpl implements AccountService {
         logger.info(Sl4jToString.info(2,
                 serviceName,
                 Thread.currentThread().getStackTrace()[1].getMethodName(),
-                account,
+                result.toString(),
                 result.getCode(),
                 null));
         return result;
@@ -181,7 +181,7 @@ public class AccountServiceImpl implements AccountService {
         logger.info(Sl4jToString.info(2,
                 serviceName,
                 Thread.currentThread().getStackTrace()[1].getMethodName(),
-                pageNow + "," + pageSize + "," + type,
+                result.toString(),
                 result.getCode(),
                 null));
         return result;
@@ -216,7 +216,7 @@ public class AccountServiceImpl implements AccountService {
         logger.info(Sl4jToString.info(2,
                 serviceName,
                 Thread.currentThread().getStackTrace()[1].getMethodName(),
-                id,
+                result.toString(),
                 result.getCode(),
                 null));
         return result;
