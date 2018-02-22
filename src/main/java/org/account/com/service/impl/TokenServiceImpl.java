@@ -63,14 +63,14 @@ public class TokenServiceImpl implements TokenService {
     }
 
     @Override
-    public ResponseResult updateByToken(String token) {
+    public ResponseResult updateToken(String token) {
         logger.info(Sl4jToString.info(1,
                 serviceName,
                 Thread.currentThread().getStackTrace()[1].getMethodName(),
                 token,
                 200,
                 null));
-        int i = mapper.updateByToken(token);
+        int i = mapper.updateToken(token);
         switch (i) {
             case 0:
                 result.setSuccess(true);

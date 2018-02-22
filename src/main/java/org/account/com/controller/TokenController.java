@@ -33,10 +33,10 @@ public class TokenController {
             notes = "200:成功，500：失败，201：已不存在",
             response = ResponseResult.class,
             httpMethod = "POST")
-    @RequestMapping(value = "/token/update",
+    @RequestMapping(value = "/updateToken",
             method = RequestMethod.POST)
-    public ResponseResult updateByToken(@RequestParam("token") String token) {
-        return service.updateByToken(token);
+    public ResponseResult updateToken(@RequestParam("token") String token) {
+        return service.updateToken(token);
     }
 
     @ApiOperation(value = "根据token获取token",

@@ -17,7 +17,7 @@ public interface TokenMapper {
     @Update({
             "update token_table set is_use = 'Y' where token = #{token}"
     })
-    int updateByToken(@Param("token") String token);
+    int updateToken(@Param("token") String token);
 
     @Select({
             "select uuid,account,token,end_time endTimes,is_use isUse from token_table where token=#{token} ORDER BY end_time desc LIMIT 1"
