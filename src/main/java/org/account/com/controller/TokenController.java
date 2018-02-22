@@ -31,7 +31,7 @@ public class TokenController {
             notes = "200:成功，500：失败，201：已不存在",
             response = ResponseResult.class,
             httpMethod = "PATCH")
-    @RequestMapping(value = "/token/token",
+    @RequestMapping(value = "/token",
             method = RequestMethod.PATCH)
     public ResponseResult updateByToken(@RequestParam("token") String token, @RequestParam("use") String use) {
         return service.updateByToken(token, use);
@@ -43,7 +43,7 @@ public class TokenController {
             httpMethod = "GET")
     @RequestMapping(value = "/token/{account}",
             method = RequestMethod.GET)
-    public ResponseResult getByAccount(@PathVariable("account")String account) {
+    public ResponseResult getByAccount(@PathVariable("account") String account) {
         return service.getByAccount(account);
     }
 }
