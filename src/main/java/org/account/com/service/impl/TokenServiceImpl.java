@@ -63,14 +63,14 @@ public class TokenServiceImpl implements TokenService {
     }
 
     @Override
-    public ResponseResult updateByToken(String token, String use) {
+    public ResponseResult updateByToken(String token) {
         logger.info(Sl4jToString.info(1,
                 serviceName,
                 Thread.currentThread().getStackTrace()[1].getMethodName(),
-                token + "," + use,
+                token,
                 200,
                 null));
-        int i = mapper.updateByToken(token, use);
+        int i = mapper.updateByToken(token);
         switch (i) {
             case 0:
                 result.setSuccess(true);
@@ -101,14 +101,14 @@ public class TokenServiceImpl implements TokenService {
     }
 
     @Override
-    public ResponseResult getByAccount(String account) {
+    public ResponseResult getByToken(String token) {
         logger.info(Sl4jToString.info(1,
                 serviceName,
                 Thread.currentThread().getStackTrace()[1].getMethodName(),
-                account,
+                token,
                 200,
                 null));
-        TokenModel model = mapper.getByAccount(account);
+        TokenModel model = mapper.getByToken(token);
         if (model != null) {
             result.setSuccess(true);
             result.setCode(200);

@@ -1,5 +1,6 @@
 package org.account.com.controller;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.account.com.model.TokenModel;
 import org.account.com.service.TokenService;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+@Api(value = "token", description = "token")
 @RestController
 @RequestMapping("/token")
 public class TokenController {
@@ -33,17 +35,17 @@ public class TokenController {
             httpMethod = "PATCH")
     @RequestMapping(value = "/token",
             method = RequestMethod.PATCH)
-    public ResponseResult updateByToken(@RequestParam("token") String token, @RequestParam("use") String use) {
-        return service.updateByToken(token, use);
+    public ResponseResult updateByToken(@RequestParam("token") String token) {
+        return service.updateByToken(token);
     }
 
-    @ApiOperation(value = "根据账户获取token",
+    @ApiOperation(value = "根据token获取token",
             notes = "200:成功，500：失败",
             response = ResponseResult.class,
             httpMethod = "GET")
-    @RequestMapping(value = "/token/{account}",
+    @RequestMapping(value = "/token/{token}",
             method = RequestMethod.GET)
-    public ResponseResult getByAccount(@PathVariable("account") String account) {
-        return service.getByAccount(account);
+    public ResponseResult getByToken(@PathVariable("token") String token) {
+        return service.getByToken(token);
     }
 }

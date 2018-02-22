@@ -7,7 +7,7 @@ public interface TokenService {
 
     ResponseResult add(TokenModel model);
 
-    ResponseResult updateByToken(String token, String use);
+    ResponseResult updateByToken(String token);
 
-    ResponseResult getByAccount(String account);
+    ResponseResult getByToken(String token);
 }
