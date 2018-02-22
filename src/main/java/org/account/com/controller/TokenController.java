@@ -32,9 +32,9 @@ public class TokenController {
     @ApiOperation(value = "根据token修改使用状态",
             notes = "200:成功，500：失败，201：已不存在",
             response = ResponseResult.class,
-            httpMethod = "PATCH")
+            httpMethod = "PUT")
     @RequestMapping(value = "/token",
-            method = RequestMethod.PATCH)
+            method = RequestMethod.PUT)
     public ResponseResult updateByToken(@RequestParam("token") String token) {
         return service.updateByToken(token);
     }
