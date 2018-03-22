@@ -7,7 +7,7 @@ public class ResponseResult<T> {
     private boolean success;
     private String message;
     private T data;
-    private int code;
+    private int code = 200;
 
     public boolean isSuccess() {
         return success;
@@ -22,7 +22,11 @@ public class ResponseResult<T> {
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        try {
+            this.message = new String(message.getBytes("UTF-8"), "UTF-8");
+        } catch (Exception e) {
+            this.message = message;
+        }
     }
 
     public T getData() {

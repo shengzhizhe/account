@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import org.account.com.mapper.AccountMapper;
 import org.account.com.model.AccountModel;
 import org.account.com.service.AccountService;
+import org.account.com.util.base64.Base64Util;
 import org.account.com.util.resultJson.ResponseResult;
 import org.account.com.util.sl4j.Sl4jToString;
 import org.account.com.util.uuidUtil.GetUuid;
@@ -41,25 +42,30 @@ public class AccountServiceImpl implements AccountService {
         AccountModel model1 = mapper.getByAccount(model.getAccount());
         if (model1 != null) {
             result.setSuccess(false);
-            result.setCode(501);
-            result.setMessage(null);
+            result.setMessage("账号重复");
             result.setData(null);
         } else {
             model.setUuid(GetUuid.getUUID());
             if (model.getTimes() <= 0)
                 model.setTimes(System.currentTimeMillis());
+            try {
+                model.setPassword(Base64Util.encode(model.getPassword()));
+            } catch (Exception e) {
+                result.setSuccess(false);
+                result.setMessage("创建账号失败");
+                result.setData(null);
+                return result;
+            }
             int i = mapper.add(model);
             switch (i) {
                 case 1:
                     result.setSuccess(true);
-                    result.setCode(200);
-                    result.setMessage(null);
+                    result.setMessage("创建账号成功");
                     result.setData(model);
                     break;
                 default:
                     result.setSuccess(false);
-                    result.setCode(500);
-                    result.setMessage(null);
+                    result.setMessage("创建账号失败");
                     result.setData(null);
                     break;
             }
@@ -68,8 +74,8 @@ public class AccountServiceImpl implements AccountService {
                 serviceName,
                 Thread.currentThread().getStackTrace()[1].getMethodName(),
                 result.toString(),
-                result.getCode(),
-                null));
+                200,
+                result.getMessage()));
         return result;
     }
 
@@ -83,22 +89,14 @@ public class AccountServiceImpl implements AccountService {
                 null));
         int i = mapper.putPWD(account, password);
         switch (i) {
-            case 0:
-                result.setSuccess(true);
-                result.setCode(201);
-                result.setMessage(null);
-                result.setData(null);
-                break;
             case 1:
                 result.setSuccess(true);
-                result.setCode(200);
-                result.setMessage(null);
+                result.setMessage("密码修改成功");
                 result.setData(null);
                 break;
             default:
                 result.setSuccess(false);
-                result.setCode(500);
-                result.setMessage(null);
+                result.setMessage("密码修改失败");
                 result.setData(null);
                 break;
         }
@@ -107,7 +105,7 @@ public class AccountServiceImpl implements AccountService {
                 Thread.currentThread().getStackTrace()[1].getMethodName(),
                 result.toString(),
                 result.getCode(),
-                null));
+                result.getMessage()));
         return result;
     }
 
@@ -120,21 +118,16 @@ public class AccountServiceImpl implements AccountService {
                 200,
                 null));
         AccountModel model = mapper.getById(id);
+        result.setSuccess(true);
         if (model != null) {
-            result.setSuccess(true);
-            result.setCode(200);
             result.setData(model);
-        } else {
-            result.setSuccess(false);
-            result.setCode(404);
-            result.setData(null);
         }
         logger.info(Sl4jToString.info(2,
                 serviceName,
                 Thread.currentThread().getStackTrace()[1].getMethodName(),
                 result.toString(),
                 200,
-                null));
+                result.getMessage()));
         return result;
     }
 
@@ -147,21 +140,16 @@ public class AccountServiceImpl implements AccountService {
                 200,
                 null));
         AccountModel model = mapper.getByAccount(account);
+        result.setSuccess(true);
         if (model != null) {
-            result.setSuccess(true);
-            result.setCode(200);
             result.setData(model);
-        } else {
-            result.setSuccess(false);
-            result.setCode(404);
-            result.setData(null);
         }
         logger.info(Sl4jToString.info(2,
                 serviceName,
                 Thread.currentThread().getStackTrace()[1].getMethodName(),
                 result.toString(),
                 result.getCode(),
-                null));
+                result.getMessage()));
         return result;
     }
 
@@ -177,7 +165,6 @@ public class AccountServiceImpl implements AccountService {
         PageHelper.startPage(pageNow, pageSize);
         Page<AccountModel> page = mapper.findAllPage(type, account);
         result.setSuccess(true);
-        result.setCode(200);
         result.setData(page);
         logger.info(Sl4jToString.info(2,
                 serviceName,
@@ -198,19 +185,14 @@ public class AccountServiceImpl implements AccountService {
                 null));
         int i = mapper.del(id);
         switch (i) {
-            case 0:
-                result.setSuccess(true);
-                result.setCode(201);
-                result.setData(null);
-                break;
             case 1:
                 result.setSuccess(true);
-                result.setCode(200);
+                result.setMessage("删除账号成功");
                 result.setData(null);
                 break;
             default:
                 result.setSuccess(false);
-                result.setCode(500);
+                result.setMessage("删除账号失败");
                 result.setData(null);
                 break;
         }
@@ -219,7 +201,7 @@ public class AccountServiceImpl implements AccountService {
                 Thread.currentThread().getStackTrace()[1].getMethodName(),
                 result.toString(),
                 result.getCode(),
-                null));
+                result.getMessage()));
         return result;
     }
 }

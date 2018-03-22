@@ -1,5 +1,9 @@
 package org.account.com.model;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
@@ -10,8 +14,12 @@ public class AccountModel implements Serializable {
     //    主键
     private String uuid;
     //    账号
+    @NotBlank(message = "账户不能为空")
+    @Email(message = "邮箱格式错误")
     private String account;
     //    密码
+    @NotBlank(message = "密码不能为空")
+    @Size(min = 8, max = 16, message = "密码长度在8-16位之间")
     private String password;
     //    账号类型
 //    1:客户  2：客户升级为商家  3：后台用户 -1:超级管理员
