@@ -46,6 +46,8 @@ public class AccountServiceImpl implements AccountService {
             result.setData(null);
         } else {
             model.setUuid(GetUuid.getUUID());
+            if (model.getTimes() <= 0)
+                model.setTimes(System.currentTimeMillis());
             int i = mapper.add(model);
             switch (i) {
                 case 1:
