@@ -18,7 +18,6 @@ public class TokenController {
     private TokenService service;
 
     @ApiOperation(value = "添加token",
-            notes = "200:成功；501:重复,400:数据格式不符合要求",
             response = ResponseResult.class,
             httpMethod = "POST",
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
@@ -32,21 +31,17 @@ public class TokenController {
     }
 
     @ApiOperation(value = "根据token修改使用状态",
-            notes = "200:成功，500：失败，201：已不存在",
             response = ResponseResult.class,
             httpMethod = "POST",
-            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(value = "/updateToken",
             method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseResult updateToken(@RequestParam("token") String token) {
         return service.updateToken(token);
     }
 
     @ApiOperation(value = "根据token获取token",
-            notes = "200:成功，500：失败",
             response = ResponseResult.class,
             httpMethod = "GET",
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

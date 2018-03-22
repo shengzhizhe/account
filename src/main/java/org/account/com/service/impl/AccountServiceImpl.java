@@ -118,9 +118,12 @@ public class AccountServiceImpl implements AccountService {
                 200,
                 null));
         AccountModel model = mapper.getById(id);
-        result.setSuccess(true);
         if (model != null) {
+            result.setSuccess(true);
             result.setData(model);
+        } else {
+            result.setSuccess(false);
+            result.setData(null);
         }
         logger.info(Sl4jToString.info(2,
                 serviceName,
@@ -140,9 +143,12 @@ public class AccountServiceImpl implements AccountService {
                 200,
                 null));
         AccountModel model = mapper.getByAccount(account);
-        result.setSuccess(true);
         if (model != null) {
+            result.setSuccess(true);
             result.setData(model);
+        } else {
+            result.setSuccess(false);
+            result.setData(null);
         }
         logger.info(Sl4jToString.info(2,
                 serviceName,

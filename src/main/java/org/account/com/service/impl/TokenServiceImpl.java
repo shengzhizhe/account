@@ -42,14 +42,10 @@ public class TokenServiceImpl implements TokenService {
         switch (i) {
             case 1:
                 result.setSuccess(true);
-                result.setCode(200);
-                result.setMessage(null);
                 result.setData(model);
                 break;
             default:
                 result.setSuccess(false);
-                result.setCode(500);
-                result.setMessage(null);
                 result.setData(null);
                 break;
         }
@@ -58,7 +54,7 @@ public class TokenServiceImpl implements TokenService {
                 Thread.currentThread().getStackTrace()[1].getMethodName(),
                 result.toString(),
                 result.getCode(),
-                null));
+                result.getMessage()));
         return result;
     }
 
@@ -72,22 +68,12 @@ public class TokenServiceImpl implements TokenService {
                 null));
         int i = mapper.updateToken(token);
         switch (i) {
-            case 0:
-                result.setSuccess(true);
-                result.setCode(201);
-                result.setMessage(null);
-                result.setData(null);
-                break;
             case 1:
                 result.setSuccess(true);
-                result.setCode(200);
-                result.setMessage(null);
                 result.setData(null);
                 break;
             default:
                 result.setSuccess(false);
-                result.setCode(500);
-                result.setMessage(null);
                 result.setData(null);
                 break;
         }
@@ -111,11 +97,9 @@ public class TokenServiceImpl implements TokenService {
         TokenModel model = mapper.getByToken(token);
         if (model != null) {
             result.setSuccess(true);
-            result.setCode(200);
             result.setData(model);
         } else {
             result.setSuccess(false);
-            result.setCode(404);
             result.setData(null);
         }
         logger.info(Sl4jToString.info(2,
@@ -123,7 +107,7 @@ public class TokenServiceImpl implements TokenService {
                 Thread.currentThread().getStackTrace()[1].getMethodName(),
                 result.toString(),
                 result.getCode(),
-                null));
+                result.getMessage()));
         return result;
     }
 }
