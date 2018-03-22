@@ -45,9 +45,11 @@ public class AccountController {
     @ApiOperation(value = "账户分页",
             notes = "type：null为查询所有，指定为查询指定类型的账户",
             response = ResponseResult.class,
-            httpMethod = "GET")
+            httpMethod = "GET",
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(value = "/page",
-            method = RequestMethod.GET)
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseResult init(@RequestParam(value = "pageNow") int pageNow,
                                @RequestParam(value = "pageSize") int pageSize,
                                @RequestParam(value = "type", required = false) String type,
@@ -59,21 +61,27 @@ public class AccountController {
     @ApiOperation(value = "根据账户修改密码",
             notes = "200:成功，500：失败，201：该账户已不存在",
             response = ResponseResult.class,
-            httpMethod = "POST")
+            httpMethod = "POST",
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(value = "/pwd",
-            method = RequestMethod.POST)
-    public ResponseResult password(@RequestParam("account") String account,
-                                   @RequestParam("password") String password) {
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseResult password(@RequestBody String account,
+                                   @RequestBody String password) {
         return accountService.putPWD(account, password);
     }
 
     @ApiOperation(value = "根据id删除",
             notes = "200:成功；500:失败，201：该账户不存在",
             response = ResponseResult.class,
-            httpMethod = "GET")
+            httpMethod = "GET",
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(value = "/del",
-            method = RequestMethod.GET)
-    public ResponseResult del(@RequestParam("id") String id) {
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseResult del(@RequestBody String id) {
         return accountService.del(id);
     }
 
@@ -85,10 +93,12 @@ public class AccountController {
             notes = "200:成功；501:账户重复,400:数据格式不符合要求",
             response = ResponseResult.class,
             httpMethod = "POST",
-            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(value = "/account",
             method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseResult add(@RequestBody AccountModel model) {
 //新增账户
         return accountService.add(model);
@@ -97,20 +107,24 @@ public class AccountController {
     @ApiOperation(value = "根据账户查找",
             notes = "200:成功；404:账户未找到",
             response = ResponseResult.class,
-            httpMethod = "GET")
+            httpMethod = "GET",
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(value = "/acc",
-            method = RequestMethod.GET)
-    public ResponseResult getByAccount(@RequestParam("account") String account) {
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseResult getByAccount(@RequestBody String account) {
         return accountService.getByAccount(account);
     }
 
     @ApiOperation(value = "根据id查找",
             notes = "根据id获取账户",
             response = ResponseResult.class,
-            httpMethod = "GET")
+            httpMethod = "GET",
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(value = "/id",
-            method = RequestMethod.GET)
-    public ResponseResult get(@RequestParam("id") String id) {
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseResult get(@RequestBody String id) {
         return accountService.getById(id);
     }
 }

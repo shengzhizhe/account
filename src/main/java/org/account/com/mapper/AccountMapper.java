@@ -68,7 +68,7 @@ public interface AccountMapper {
      * @return Page<AccountModel>
      */
     @SelectProvider(type = AccountSql.class, method = "select_page_type")
-    Page<AccountModel> findAllPage(String type, String account);
+    Page<AccountModel> findAllPage(@Param("type") String type, @Param("account") String account);
 
     /**
      * 根据id删除实体

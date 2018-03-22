@@ -175,10 +175,7 @@ public class AccountServiceImpl implements AccountService {
         PageHelper.startPage(pageNow, pageSize);
         Page<AccountModel> page = mapper.findAllPage(type, account);
         result.setSuccess(true);
-        if (page.size() > 0)
-            result.setCode(200);
-        else
-            result.setCode(404);
+        result.setCode(200);
         result.setData(page);
         logger.info(Sl4jToString.info(2,
                 serviceName,

@@ -21,10 +21,12 @@ public class TokenController {
             notes = "200:成功；501:重复,400:数据格式不符合要求",
             response = ResponseResult.class,
             httpMethod = "POST",
-            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(value = "/token",
             method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseResult add(@RequestBody TokenModel model) {
         return service.add(model);
     }
@@ -32,9 +34,13 @@ public class TokenController {
     @ApiOperation(value = "根据token修改使用状态",
             notes = "200:成功，500：失败，201：已不存在",
             response = ResponseResult.class,
-            httpMethod = "POST")
+            httpMethod = "POST",
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(value = "/updateToken",
-            method = RequestMethod.POST)
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseResult updateToken(@RequestParam("token") String token) {
         return service.updateToken(token);
     }
@@ -42,9 +48,11 @@ public class TokenController {
     @ApiOperation(value = "根据token获取token",
             notes = "200:成功，500：失败",
             response = ResponseResult.class,
-            httpMethod = "GET")
+            httpMethod = "GET",
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @RequestMapping(value = "/token/{token}",
-            method = RequestMethod.GET)
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseResult getByToken(@PathVariable("token") String token) {
         return service.getByToken(token);
     }
