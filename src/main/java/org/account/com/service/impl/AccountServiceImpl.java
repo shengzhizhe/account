@@ -28,8 +28,6 @@ public class AccountServiceImpl implements AccountService {
 
     @Resource
     private AccountMapper mapper;
-    @Resource
-    private ResponseResult<AccountModel> result;
 
     @Override
     public ResponseResult add(AccountModel model) {
@@ -82,6 +80,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public ResponseResult putPWD(String account, String password) {
+        ResponseResult<AccountModel> result = new ResponseResult<>();
         logger.info(Sl4jToString.info(1,
                 serviceName,
                 Thread.currentThread().getStackTrace()[1].getMethodName(),
@@ -112,6 +111,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public ResponseResult getById(String id) {
+        ResponseResult<AccountModel> result = new ResponseResult<>();
         logger.info(Sl4jToString.info(1,
                 serviceName,
                 Thread.currentThread().getStackTrace()[1].getMethodName(),
@@ -139,6 +139,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public ResponseResult getByAccount(String account) {
+        ResponseResult<AccountModel> result = new ResponseResult<>();
         logger.info(Sl4jToString.info(1,
                 serviceName,
                 Thread.currentThread().getStackTrace()[1].getMethodName(),
@@ -186,6 +187,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public ResponseResult del(String id) {
+        ResponseResult<AccountModel> result = new ResponseResult<>();
         logger.info(Sl4jToString.info(1,
                 serviceName,
                 Thread.currentThread().getStackTrace()[1].getMethodName(),

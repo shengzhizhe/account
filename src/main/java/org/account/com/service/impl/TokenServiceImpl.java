@@ -24,13 +24,12 @@ public class TokenServiceImpl implements TokenService {
     @Value("${spring.application.name}")
     private String serviceName;
 
-    @Resource
-    private ResponseResult<TokenModel> result;
     @Autowired
     private TokenMapper mapper;
 
     @Override
     public ResponseResult add(TokenModel model) {
+        ResponseResult<TokenModel> result = new ResponseResult<>();
         logger.info(Sl4jToString.info(1,
                 serviceName,
                 Thread.currentThread().getStackTrace()[1].getMethodName(),
@@ -60,6 +59,7 @@ public class TokenServiceImpl implements TokenService {
 
     @Override
     public ResponseResult updateToken(String token) {
+        ResponseResult<TokenModel> result = new ResponseResult<>();
         logger.info(Sl4jToString.info(1,
                 serviceName,
                 Thread.currentThread().getStackTrace()[1].getMethodName(),
@@ -88,6 +88,7 @@ public class TokenServiceImpl implements TokenService {
 
     @Override
     public ResponseResult getByToken(String token) {
+        ResponseResult<TokenModel> result = new ResponseResult<>();
         logger.info(Sl4jToString.info(1,
                 serviceName,
                 Thread.currentThread().getStackTrace()[1].getMethodName(),
