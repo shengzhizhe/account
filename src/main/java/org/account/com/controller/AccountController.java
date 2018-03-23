@@ -96,8 +96,8 @@ public class AccountController {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseResult add(@Valid @RequestBody AccountModel model,
-                              BindingResult bindingResult) {
+    public ResponseResult<AccountModel> add(@Valid @RequestBody AccountModel model,
+                                            BindingResult bindingResult) {
         ResponseResult<AccountModel> result = new ResponseResult<>();
         //数据验证
         if (bindingResult.hasErrors()) {

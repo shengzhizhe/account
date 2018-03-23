@@ -33,6 +33,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public ResponseResult add(AccountModel model) {
+        ResponseResult<AccountModel> result = new ResponseResult<>();
         logger.info(Sl4jToString.info(1,
                 serviceName,
                 Thread.currentThread().getStackTrace()[1].getMethodName(),

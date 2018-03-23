@@ -13,7 +13,7 @@ public interface AccountService {
      * @param model
      * @return int
      */
-    ResponseResult add(AccountModel model);
+    ResponseResult<AccountModel> add(AccountModel model);
 
     /**
      * 修改密码
