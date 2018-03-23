@@ -120,9 +120,11 @@ public class AccountServiceImpl implements AccountService {
         AccountModel model = mapper.getById(id);
         if (model != null) {
             result.setSuccess(true);
+            result.setMessage(null);
             result.setData(model);
         } else {
             result.setSuccess(false);
+            result.setMessage("账户未找到");
             result.setData(null);
         }
         logger.info(Sl4jToString.info(2,
